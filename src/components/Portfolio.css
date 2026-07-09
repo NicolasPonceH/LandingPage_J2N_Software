@@ -1,0 +1,217 @@
+.portfolio {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.portfolio-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(280px, auto);
+  gap: 2rem;
+}
+
+/* Base Bento Card */
+.bento-card {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  background-color: rgba(10, 10, 15, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.bento-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* Grid Sizing Classes */
+.bento-large {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.bento-tall {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.bento-standard {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.bento-full {
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+/* Background gradient wrapper */
+.bento-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.08;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: blur(40px);
+}
+
+.bento-card:hover .bento-bg {
+  opacity: 0.3;
+  transform: scale(1.2);
+  filter: blur(20px);
+}
+
+/* Massive watermark icon */
+.bento-icon-bg {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  color: #ffffff;
+  opacity: 0.03;
+  z-index: 0;
+  transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.bento-card:hover .bento-icon-bg {
+  transform: scale(1.1) rotate(-15deg) translate(-20px, 20px);
+  opacity: 0.08;
+}
+
+/* Foreground content */
+.bento-content {
+  position: relative;
+  z-index: 1;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.bento-card:hover .bento-content {
+  transform: translateY(0);
+}
+
+/* Header (Title + Icon) */
+.bento-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.bento-icon-small {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+/* Tags */
+.bento-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.bento-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Typography */
+.bento-content h3 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.bento-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Action button that reveals */
+.bento-action {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 0.95rem;
+  height: 0;
+  overflow: hidden;
+}
+
+.bento-card:hover .bento-action {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+  transition-delay: 0.1s;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .portfolio-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bento-large, .bento-full {
+    grid-column: span 2;
+  }
+  
+  .bento-tall {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-bento-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-large, .bento-tall, .bento-standard, .bento-full {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .bento-card {
+    padding: 2rem;
+  }
+  
+  .bento-content {
+    transform: translateY(0);
+  }
+  
+  .bento-action {
+    opacity: 1;
+    transform: translateY(0);
+    height: auto;
+  }
+}

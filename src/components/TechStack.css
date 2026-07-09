@@ -1,0 +1,98 @@
+.tech-stack {
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 0;
+}
+
+.marquee-wrapper {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+  margin-left: calc(-50vw + 50%); /* Hace que rompa el contenedor y ocupe el 100% de la pantalla */
+}
+
+/* Efecto de difuminado en los bordes izquierdo y derecho */
+.marquee-fade-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: 100%;
+  background: linear-gradient(to right, var(--bg-color), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-fade-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15%;
+  height: 100%;
+  background: linear-gradient(to left, var(--bg-color), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  width: max-content;
+  animation: scrollMarquee 35s linear infinite;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  /* Since we duplicated the array 3 times, translating by -33.33% scrolls exactly one set */
+  100% { transform: translateX(calc(-33.333% - 1.33rem)); } 
+}
+
+/* Estilo de los items del Marquee */
+.tech-item-marquee {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  min-width: 180px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+}
+
+.tech-icon-marquee {
+  width: 64px;
+  height: 64px;
+  filter: grayscale(100%) opacity(0.6);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tech-name-marquee {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: color 0.4s ease;
+}
+
+/* Hover Efectos: Revive el color */
+.tech-item-marquee:hover {
+  transform: translateY(-10px) scale(1.05);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--tech-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--tech-color);
+}
+
+.tech-item-marquee:hover .tech-icon-marquee {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.1);
+}
+
+.tech-item-marquee:hover .tech-name-marquee {
+  color: var(--text-main);
+}
